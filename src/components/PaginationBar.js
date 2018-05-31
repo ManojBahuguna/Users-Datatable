@@ -35,14 +35,13 @@ class PaginationBar extends Component {
   getRangeFromPageIndex = pageIndex => {
     const { usersPerPage, totalUsers } = this.props;
 
+    if (totalUsers === 0) return { from: 0, to: 0 };
+
     let from = pageIndex * usersPerPage;
     let to = from + usersPerPage - 1;
 
     if (to > totalUsers)
       to = totalUsers - 1;
-
-    if (from > to)
-      from = to;
 
     return { from, to };
   };
@@ -89,6 +88,9 @@ class PaginationBar extends Component {
     if (currentPage > totalPages)
       currentPage = totalPages - 1;
 
+    if (currentPage < 0)
+      currentPage = 0;
+
     this.setState({
       totalPages,
       currentPage
@@ -104,7 +106,14 @@ class PaginationBar extends Component {
 
   render() {
     const { totalUsers } = this.props;
-    const range = this.getRangeFromPageIndex(this.state.currentPage);
+
+    const displayRange = { from: 0, to: 0 };
+    if (totalUsers > 0) {
+      // add 1 to zero based indexed range
+      const range = this.getRangeFromPageIndex(this.state.currentPage);
+      displayRange.from = range.from + 1;
+      displayRange.to = range.to + 1;
+    }
 
     return (
       <Toolbar style={styles.root}>
@@ -112,7 +121,7 @@ class PaginationBar extends Component {
         <Button style={styles.tool} disabled={this.isFirstPage()} onClick={this.goToPrevious}>Prev</Button>
 
         <Typography style={{ ...styles.tool, ...styles.info }}>
-          {range.from + 1}-{range.to + 1} of {totalUsers}
+          {displayRange.from}-{displayRange.to} of {totalUsers}
         </Typography>
 
         <Button style={styles.tool} disabled={this.isLastPage()} onClick={this.goToNext}>Next</Button>
