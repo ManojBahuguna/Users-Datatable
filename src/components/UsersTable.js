@@ -4,6 +4,7 @@ import { Table, TableHead, TableRow, TableBody, TextField, Paper, TableSortLabel
 import { getAllUsers, getFilteredUsers, getSortedUsers } from '../services/Users';
 import UserRow from './UserRow';
 import StyledCell from './StyledCell';
+import PaginationBar from './PaginationBar';
 
 const styles = {
   root: {
@@ -17,13 +18,19 @@ const styles = {
   }
 };
 
+const DEFAULT_USERS_PER_PAGE = 5;
+
 class UsersTable extends Component {
   state = {
     users: getAllUsers(),
     filterValue: '',
     sortBy: '',
-    sortInDescending: false
-  }
+    sortInDescending: false,
+    range: {
+      from: 0,
+      to: DEFAULT_USERS_PER_PAGE - 1
+    }
+  };
 
   handleFilterValueChange = (e) => {
     const filterValue = e.target.value;
@@ -57,9 +64,15 @@ class UsersTable extends Component {
     this.setState(state);
   };
 
+  handlePagination = range => {
+    this.setState({ range });
+  };
+
 
   render() {
-    const { users, filterValue, sortBy, sortInDescending } = this.state;
+    const { users, filterValue, sortBy, sortInDescending, range } = this.state;
+
+    const displayedUsers = users.slice(range.from, range.to + 1);
 
     return (
       <Paper style={styles.root}>
@@ -86,10 +99,12 @@ class UsersTable extends Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {users.map(user => <UserRow key={user.id} user={user} />)}
+              {displayedUsers.map(user => <UserRow key={user.id} user={user} />)}
             </TableBody>
           </Table>
         </div>
+
+        <PaginationBar onRangeChange={this.handlePagination} totalUsers={users.length} usersPerPage={DEFAULT_USERS_PER_PAGE} />
       </Paper>
     );
   }
