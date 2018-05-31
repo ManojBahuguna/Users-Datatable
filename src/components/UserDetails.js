@@ -38,7 +38,7 @@ const UserDetails = ({ match }) => {
       <Table>
         <TableBody>
           {shownFields.map(({ key, fieldName }) =>
-            <TableRow id={key}>
+            <TableRow key={key}>
               <TableCell style={styles.fieldHeading} component="th" scope="row"> {fieldName} </TableCell>
               <TableCell numeric> {user[key]} </TableCell>
             </TableRow>
