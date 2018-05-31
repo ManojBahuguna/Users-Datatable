@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import UsersTable from './UsersTable';
 import UserDetails from './UserDetails';
 import { fetchUsers } from '../services/Users';
+import Header from './Header';
 
 class App extends Component {
 
@@ -27,7 +28,7 @@ class App extends Component {
   render() {
     return (
       <div className="UsersDataApp">
-        <h1>UsersData - Data Peace Challenge</h1>
+        <Header />
         {
           this.state.isDataFetched ?
             <Switch>
