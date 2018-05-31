@@ -27,12 +27,23 @@ const styles = {
   },
   cell: {
     padding: '0.7em'
+  },
+  error: {
+    margin: '3em',
+    textAlign: 'center'
   }
 };
 
 const UserDetails = ({ match }) => {
   const userId = Number(match.params.userId);
   const user = getUserById(userId);
+
+  if (user === undefined)
+    return (
+      <Typography color="error" style={styles.error} variant="headline" component="h2">
+        Invalid User
+      </Typography>
+    );
 
   return (
     <Paper style={styles.root}>

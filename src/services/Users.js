@@ -1,4 +1,4 @@
-export const API_URL = 'http://demo9197058.mockable.io/users';
+export const API_URL = 'https://demo9197058.mockable.io/users';
 
 let users = [];
 
