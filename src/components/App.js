@@ -13,7 +13,6 @@ const styles = {
   },
   error: {
     textAlign: 'center',
-    color: '#D50000',
     margin: '2em'
   }
 };
@@ -49,7 +48,7 @@ class App extends Component {
               <Route path='/user/:userId' component={UserDetails} />
             </Switch> :
             this.state.dataFetchingFailed ?
-              <Typography style={styles.error} variant="headline"> Failed to fetch data! </Typography> :
+              <Typography color="error" style={styles.error} variant="headline"> Failed to fetch data! </Typography> :
               <CircularProgress size={70} style={styles.loader} />
         }
       </div>

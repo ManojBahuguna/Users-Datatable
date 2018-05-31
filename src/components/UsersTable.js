@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Table, TableHead, TableRow, TableBody, TextField, Paper, TableSortLabel } from '@material-ui/core';
+import { Table, TableHead, TableRow, TableBody, TextField, Paper, TableSortLabel, Typography, TableCell } from '@material-ui/core';
 import { getAllUsers, getFilteredUsers, getSortedUsers } from '../services/Users';
 import UserRow from './UserRow';
 import StyledCell from './StyledCell';
@@ -100,7 +100,15 @@ class UsersTable extends Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {displayedUsers.map(user => <UserRow key={user.id} user={user} />)}
+              {
+                displayedUsers.length === 0 ?
+                  <TableRow>
+                    <TableCell colSpan={9}>
+                      <Typography variant="headline" color="error">No Users!</Typography>
+                    </TableCell>
+                  </TableRow> :
+                  displayedUsers.map(user => <UserRow key={user.id} user={user} />)
+              }
             </TableBody>
           </Table>
         </div>
