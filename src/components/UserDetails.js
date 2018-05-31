@@ -16,13 +16,17 @@ const styles = {
   root: {
     maxWidth: '700px',
     margin: '3em auto',
-    padding: '0.1em',
+    padding: '0.1em 0.5em',
+    overFlow: 'auto'
   },
   title: {
-    margin: '1em',
+    margin: '1em 0.2em',
   },
   fieldHeading: {
-    fontSize: '0.9em',
+    fontSize: '0.9em'
+  },
+  cell: {
+    padding: '0.7em'
   }
 };
 
@@ -39,8 +43,8 @@ const UserDetails = ({ match }) => {
         <TableBody>
           {shownFields.map(({ key, fieldName }) =>
             <TableRow key={key}>
-              <TableCell style={styles.fieldHeading} component="th" scope="row"> {fieldName} </TableCell>
-              <TableCell numeric> {user[key]} </TableCell>
+              <TableCell style={{ ...styles.fieldHeading, ...styles.cell }} component="th" scope="row"> {fieldName} </TableCell>
+              <TableCell style={styles.cell} numeric> {user[key]} </TableCell>
             </TableRow>
           )}
         </TableBody>

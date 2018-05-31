@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Toolbar, Button, Typography, Tabs, Tab } from "@material-ui/core";
+import { Toolbar, Button, Typography } from "@material-ui/core";
 
 const styles = {
   root: {
-    marginTop: '1em'
+    marginTop: '1em',
+    flexWrap: 'wrap'
   },
   tab: {
     minWidth: 0
@@ -63,7 +64,7 @@ class PaginationBar extends Component {
   };
 
   goToNext = () => {
-    const { currentPage, totalPages } = this.state;
+    const { currentPage } = this.state;
     if (this.isLastPage()) return;
 
     const changedPage = currentPage + 1;
@@ -102,8 +103,7 @@ class PaginationBar extends Component {
   }
 
   render() {
-    const { totalUsers, usersPerPage } = this.props;
-    const { currentPage, totalPages } = this.state;
+    const { totalUsers } = this.props;
     const range = this.getRangeFromPageIndex(this.state.currentPage);
 
     return (
@@ -111,7 +111,7 @@ class PaginationBar extends Component {
         <Button style={styles.tool} disabled={this.isFirstPage()} onClick={this.goToFirst}>First</Button>
         <Button style={styles.tool} disabled={this.isFirstPage()} onClick={this.goToPrevious}>Prev</Button>
 
-        <Typography style={styles.tool} style={styles.info}>
+        <Typography style={{ ...styles.tool, ...styles.info }}>
           {range.from + 1}-{range.to + 1} of {totalUsers}
         </Typography>
 

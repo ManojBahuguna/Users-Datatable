@@ -8,7 +8,8 @@ import PaginationBar from './PaginationBar';
 
 const styles = {
   root: {
-    padding: '1em'
+    padding: '1em',
+    margin: '3em 1em'
   },
   table: {
     overflow: 'auto'
