@@ -22,14 +22,30 @@ export const getFilteredUsers = (filterValue, filterBy = 'first_name', usersData
     user[filterBy].toLowerCase().startsWith(filterValue.toLowerCase())
   );
 
-export const getSortedUsers = (sortBy, sortInDescendingOrder, usersData = users) =>
-  usersData.sort((user, nextUser) =>
-    String(user[sortBy])
-      .toLowerCase()
-      .localeCompare(
-        nextUser[sortBy].toLowerCase()
-      ) * (sortInDescendingOrder === true ? -1 : 1)
-  );
+export const getSortedUsers = (sortBy, sortInDescendingOrder, usersData = users) => {
+  if (!usersData.length) return [];
+  if (!sortBy) return usersData;
+
+  const isString = typeof usersData[0][sortBy] === 'string';
+
+  return usersData.sort((user, nextUser) => {
+
+    // if value is string then convert to lowercase before comparing
+
+    const diff =
+      isString
+        ? user[sortBy]
+          .toLowerCase()
+          .localeCompare(
+            nextUser[sortBy]
+              .toLowerCase()
+          )
+        : user[sortBy] - nextUser[sortBy];
+
+    // return according to sort direction
+    return diff * (sortInDescendingOrder === true ? -1 : 1)
+  });
+};
 
 export const getUserById = userId =>
   users.find(user =>

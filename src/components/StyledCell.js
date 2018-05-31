@@ -8,8 +8,8 @@ const style = {
   whiteSpace: 'nowrap'
 };
 
-const StyledCell = ({ children }) => (
-  <TableCell style={style}>
+const StyledCell = ({ children, ...props }) => (
+  <TableCell style={style} {...props}>
     {children}
   </TableCell>
 );
