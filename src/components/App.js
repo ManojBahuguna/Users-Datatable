@@ -4,6 +4,19 @@ import UsersTable from './UsersTable';
 import UserDetails from './UserDetails';
 import { fetchUsers } from '../services/Users';
 import Header from './Header';
+import { CircularProgress, Typography } from '@material-ui/core';
+
+const styles = {
+  loader: {
+    margin: '3em auto',
+    display: 'block'
+  },
+  error: {
+    textAlign: 'center',
+    color: '#D50000',
+    margin: '2em'
+  }
+};
 
 class App extends Component {
 
@@ -36,8 +49,8 @@ class App extends Component {
               <Route path='/user/:userId' component={UserDetails} />
             </Switch> :
             this.state.dataFetchingFailed ?
-              'There was error fetching data' :
-              'Loading...'
+              <Typography style={styles.error} variant="headline"> Failed to fetch data! </Typography> :
+              <CircularProgress size={70} style={styles.loader} />
         }
       </div>
     );
