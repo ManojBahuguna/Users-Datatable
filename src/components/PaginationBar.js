@@ -117,15 +117,15 @@ class PaginationBar extends Component {
 
     return (
       <Toolbar style={styles.root}>
-        <Button style={styles.tool} disabled={this.isFirstPage()} onClick={this.goToFirst}>First</Button>
-        <Button style={styles.tool} disabled={this.isFirstPage()} onClick={this.goToPrevious}>Prev</Button>
+        <Button variant="raised" style={styles.tool} disabled={this.isFirstPage()} onClick={this.goToFirst}>First</Button>
+        <Button variant="raised" color="primary" style={styles.tool} disabled={this.isFirstPage()} onClick={this.goToPrevious}>Prev</Button>
 
-        <Typography style={{ ...styles.tool, ...styles.info }}>
+        <Typography variant="subheading" style={{ ...styles.tool, ...styles.info }}>
           {displayRange.from}-{displayRange.to} of {totalUsers}
         </Typography>
 
-        <Button style={styles.tool} disabled={this.isLastPage()} onClick={this.goToNext}>Next</Button>
-        <Button style={styles.tool} disabled={this.isLastPage()} onClick={this.goToLast}>Last</Button>
+        <Button variant="raised" color="primary" style={styles.tool} disabled={this.isLastPage()} onClick={this.goToNext}>Next</Button>
+        <Button variant="raised" style={styles.tool} disabled={this.isLastPage()} onClick={this.goToLast}>Last</Button>
       </Toolbar>
     );
   }
