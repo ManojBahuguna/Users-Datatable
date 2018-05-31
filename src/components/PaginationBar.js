@@ -4,7 +4,8 @@ import { Toolbar, Button, Typography } from "@material-ui/core";
 const styles = {
   root: {
     marginTop: '1em',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    justifyContent: 'space-evenly'
   },
   tab: {
     minWidth: 0
@@ -13,9 +14,9 @@ const styles = {
     whiteSpace: 'nowrap'
   },
   tool: {
-    margin: 'auto'
+    margin: '1em'
   }
-}
+};
 
 class PaginationBar extends Component {
   constructor(props) {
